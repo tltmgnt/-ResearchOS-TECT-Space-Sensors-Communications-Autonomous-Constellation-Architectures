@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "name": "Synthetic pLEO snapshot comparison",
+  "minElevation": 10,
+  "crosslinkKm": 4000,
+  "gateway": "Gateway",
+  "disabled": [
+    "S6",
+    "S7"
+  ],
+  "source": "Fictional Earth-fixed positions. No ephemeris or sensor measurements.",
+  "review": "",
+  "satellites": [
+    {
+      "id": "S1",
+      "lat": 15,
+      "lon": -165,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S2",
+      "lat": -15,
+      "lon": -135,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S3",
+      "lat": 15,
+      "lon": -105,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S4",
+      "lat": -15,
+      "lon": -75,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S5",
+      "lat": 15,
+      "lon": -45,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S6",
+      "lat": -15,
+      "lon": -15,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S7",
+      "lat": 15,
+      "lon": 15,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S8",
+      "lat": -15,
+      "lon": 45,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S9",
+      "lat": 15,
+      "lon": 75,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S10",
+      "lat": -15,
+      "lon": 105,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S11",
+      "lat": 15,
+      "lon": 135,
+      "altitudeKm": 550
+    },
+    {
+      "id": "S12",
+      "lat": -15,
+      "lon": 165,
+      "altitudeKm": 550
+    }
+  ],
+  "sites": [
+    {
+      "id": "Gateway",
+      "lat": 15,
+      "lon": -15
+    },
+    {
+      "id": "Site A",
+      "lat": -15,
+      "lon": 15
+    },
+    {
+      "id": "Site B",
+      "lat": 15,
+      "lon": 45
+    },
+    {
+      "id": "Site C",
+      "lat": 45,
+      "lon": 120
+    }
+  ]
+}
