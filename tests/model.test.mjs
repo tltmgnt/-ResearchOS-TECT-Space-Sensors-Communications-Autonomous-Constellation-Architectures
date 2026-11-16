@@ -1,0 +1,11 @@
+import{test}from'node:test';import assert from'node:assert/strict';import{evaluate,visible,crosslink,validate,csv}from'../model.mjs';
+const sat=(id,lon)=>({id,lat:0,lon,altitudeKm:550});
+const base=()=>({version:1,name:'Test',minElevation:0,crosslinkKm:4000,gateway:'G',source:'Synthetic',review:'',disabled:[],satellites:[sat('A',0),sat('B',20),sat('C',40)],sites:[{id:'G',lat:0,lon:0},{id:'Remote',lat:0,lon:40}]});
+test('overhead visible and opposite Earth invisible',()=>{assert.equal(visible(sat('A',0),{lat:0,lon:0},90),true);assert.equal(visible(sat('A',180),{lat:0,lon:0},0),false);});
+test('crosslink range and Earth obstruction',()=>{assert.equal(crosslink(sat('A',0),sat('B',20),4000),true);assert.equal(crosslink(sat('A',0),sat('B',20),100),false);assert.equal(crosslink(sat('A',0),sat('B',180),20000),false);});
+test('graph routing through intermediate satellite',()=>{const s=base(),r=evaluate(s)[0];assert.equal(r.sites[1].gatewayReachable,true);assert.equal(r.sites[1].crosslinkHops,0);s.minElevation=30;const rr=evaluate(s)[0];assert.equal(rr.sites[1].crosslinkHops,2);});
+test('outage preserves local access but disconnects route',()=>{const s=base();s.minElevation=30;s.disabled=['B'];const r=evaluate(s)[1];assert.equal(r.sites[1].geometricAccess,true);assert.equal(r.sites[1].gatewayReachable,false);});
+test('all satellites disabled produces explicit no access',()=>{const s=base();s.disabled=['A','B','C'];const r=evaluate(s)[1];assert.equal(r.activeSatellites,0);assert.equal(r.reachableSites,0);assert.equal(r.sites[0].crosslinkHops,null);});
+test('no disabled satellites reproduces baseline',()=>{const [a,b]=evaluate(base());a.scenario=b.scenario;assert.deepEqual(a,b);});
+test('invalid inputs rejected',()=>{for(const change of [s=>s.minElevation=NaN,s=>s.disabled=['missing'],s=>s.satellites[0].altitudeKm=0,s=>s.sites[0].lat=91,s=>s.gateway='missing']){const s=base();change(s);assert.throws(()=>validate(s));}});
+test('CSV retains unreachable and escapes formula IDs',()=>{const s=base();s.sites[1].id='=1+1';assert.ok(csv(evaluate(s)).includes("\"'=1+1\""));});
