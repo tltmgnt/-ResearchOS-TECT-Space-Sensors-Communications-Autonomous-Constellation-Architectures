@@ -1,0 +1,2 @@
+# -ResearchOS-TECT-Space-Sensors-Communications-Autonomous-Constellation-Architectures
+ Independent research workspace for space sensors, communications, autonomy, and proliferated low Earth orbit (pLEO) constellation architectures, supporting reproducible scenario modeling, architecture comparisons, and evidence-linked assessment of coverage, connectivity, resilience, coordination, and uncertainty.
